@@ -16,5 +16,6 @@ namespace ISNP142324ISNP094824_Bloque2
         {
             InitializeComponent();
         }
+
     }
 }
