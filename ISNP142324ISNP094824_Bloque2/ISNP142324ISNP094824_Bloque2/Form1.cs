@@ -59,6 +59,7 @@ namespace ISNP142324ISNP094824_Bloque2
             txtSinopsis.Text = dt.Rows[posicion].ItemArray[3].ToString();
             txtDuracion.Text = dt.Rows[posicion].ItemArray[4].ToString();
             txtClasificacion.Text = dt.Rows[posicion].ItemArray[5].ToString();
+            lblRegistro.Text = (posicion + 1) + " de " + dt.Rows.Count;
         }
 
         private void txtClasificacion_Click(object sender, EventArgs e)
@@ -69,6 +70,75 @@ namespace ISNP142324ISNP094824_Bloque2
         private void grbDatos_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSinopsis_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtClasificacion_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            if (posicion < dt.Rows.Count - 1)
+            {
+
+                posicion += 1;
+                mostrarDatos();
+            }
+            else
+            {
+                btnSiguiente.Enabled = false;
+                btnUltimo.Enabled = false;
+            }
+        }
+
+        private void btnUltimo_Click(object sender, EventArgs e)
+        {
+            posicion = dt.Rows.Count - 1;
+            mostrarDatos();
+
+            btnSiguiente.Enabled = false;
+            btnUltimo.Enabled = false;
+            btnPrimero.Enabled = true;
+            btnAnterior.Enabled = true;
+        }
+
+        private void btnPrimero_Click(object sender, EventArgs e)
+        {
+            posicion = 0;
+            mostrarDatos();
+
+            btnSiguiente.Enabled = true;
+            btnUltimo.Enabled = true;
+            btnPrimero.Enabled = false;
+            btnAnterior.Enabled=false;
+
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            if (posicion > 0)
+            {
+                posicion -= 1;
+                mostrarDatos();
+                btnSiguiente.Enabled = true;
+                btnUltimo.Enabled = true;
+            }
+            else
+            {
+                btnAnterior.Enabled = false;
+                btnPrimero.Enabled = false;
+            }
         }
     }
 }
