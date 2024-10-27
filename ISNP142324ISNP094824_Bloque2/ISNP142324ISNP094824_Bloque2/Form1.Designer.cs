@@ -241,7 +241,7 @@
             this.grbEdicion.Controls.Add(this.btnNuevo);
             this.grbEdicion.Location = new System.Drawing.Point(581, 367);
             this.grbEdicion.Name = "grbEdicion";
-            this.grbEdicion.Size = new System.Drawing.Size(501, 57);
+            this.grbEdicion.Size = new System.Drawing.Size(519, 57);
             this.grbEdicion.TabIndex = 2;
             this.grbEdicion.TabStop = false;
             this.grbEdicion.Text = "EDICION";
@@ -249,12 +249,13 @@
             // btnEliminar
             // 
             this.btnEliminar.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.Location = new System.Drawing.Point(331, 16);
+            this.btnEliminar.Location = new System.Drawing.Point(343, 16);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(154, 35);
             this.btnEliminar.TabIndex = 3;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnModificar
             // 
@@ -276,6 +277,7 @@
             this.btnNuevo.TabIndex = 1;
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.UseVisualStyleBackColor = true;
+            this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
             // 
             // Form1
             // 

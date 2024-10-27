@@ -61,7 +61,19 @@ namespace ISNP142324ISNP094824_Bloque2
             txtClasificacion.Text = dt.Rows[posicion].ItemArray[5].ToString();
             lblRegistro.Text = (posicion + 1) + " de " + dt.Rows.Count;
         }
-
+        private void limpiarCajas()
+        {
+            txtTitulo.Text = "";
+            txtAutor.Text = "";
+            txtSinopsis.Text = "";
+            txtDuracion.Text = "";
+            txtClasificacion.Text = "";
+        }
+        private void habdescontroles(Boolean estado)
+        {
+            grbNavegacion.Enabled = !estado;
+            btnEliminar.Enabled = !estado;
+        }
         private void txtClasificacion_Click(object sender, EventArgs e)
         {
 
@@ -74,6 +86,20 @@ namespace ISNP142324ISNP094824_Bloque2
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            if (btnModificar.Text == "Modificar")//funcionamiento de boton modificar
+            {
+                btnModificar.Text = "Cancelar";
+                btnNuevo.Text = "Guardar";
+                accion = "modificar";
+                habdescontroles(true);
+            }
+            else//cancelar de boton modificar
+            {
+                mostrarDatos();
+                habdescontroles(false);
+                btnModificar.Text = "Modificar";
+                btnNuevo.Text = "Nuevo";
+            }
 
         }
 
@@ -101,7 +127,7 @@ namespace ISNP142324ISNP094824_Bloque2
             {
                 btnSiguiente.Enabled = false;
                 btnUltimo.Enabled = false;
-                
+
 
             }
         }
@@ -157,6 +183,63 @@ namespace ISNP142324ISNP094824_Bloque2
             {
                 btnAnterior.Enabled = false;
                 btnPrimero.Enabled = false;
+            }
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            if (btnNuevo.Text == "Nuevo")
+            {
+                btnNuevo.Text = "Guardar";
+                btnModificar.Text = "Cancelar";
+                limpiarCajas();
+                accion = "nuevo";
+                habdescontroles(true);
+            }
+            else//guardar
+            {
+                string[] datos = {
+                    accion,
+                    dt.Rows[posicion].ItemArray[0].ToString(),//id pelicula
+                    txtTitulo.Text,
+                    txtAutor.Text,
+                    txtSinopsis.Text,
+                    txtDuracion.Text,
+                    txtClasificacion.Text,
+                };
+                String response = objConexion.administrarPeliculas(datos);
+                if (response != "1")
+                {
+                    MessageBox.Show("Error: " + response, "Registrando datos de pelicula", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+                else
+                {
+                    obtenerDatos();
+                    habdescontroles(false);
+                    btnNuevo.Text = "Nuevo";
+                    btnModificar.Text = "Modificar";
+                }
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e){
+            if (MessageBox.Show("Esta seguro de eliminar a: " + txtTitulo.Text, "Eliminando peliculas",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes){
+                String[] datos = {
+                    "eliminar", dt.Rows[posicion].ItemArray[0].ToString(),
+                };
+                String response = objConexion.administrarPeliculas(datos);
+                if (response != "1")
+                {
+                    MessageBox.Show("Error: " + response, "Eliminando datos de pelicula", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+                else
+                {
+                    obtenerDatos();
+                }
+
             }
         }
     }

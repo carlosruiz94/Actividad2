@@ -1,10 +1,11 @@
-﻿using System;
+﻿using System; 
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;//Clase necesaria para la conexión de base de datos
-using System.Data.SqlClient; //Clase necesaria para conectar a SQLServer
+using System.Data.SqlClient;
+using System.Web; //Clase necesaria para conectar a SQLServer
 
 namespace ISNP142324ISNP094824_Bloque2
 {
@@ -28,6 +29,43 @@ namespace ISNP142324ISNP094824_Bloque2
             miAdaptador.SelectCommand = miComando;//Asignamos el comando al adaptador
             miAdaptador.Fill(ds, "peliculas");
             return ds;
+        }
+        public String administrarPeliculas(String[] peliculas)
+        {
+            String sql = "";
+            if (peliculas[0] == "nuevo")
+            {
+                sql = "INSERT INTO peliculas(titulo, autor, sinopsis, duración, clasificación) VALUES(" +
+                    "'" + peliculas[2] + "'," +
+                    "'" + peliculas[3] + "'," +
+                    "'" + peliculas[4] + "'," +
+                    "'" + peliculas[5] + "'," +
+                    "'" + peliculas[6] + "')";
+            }
+            else if (peliculas[0] == "modificar")
+            {
+                sql = "UPDATE peliculas SET titulo='" + peliculas[2] + "', autor='" + peliculas[3] + "', " +
+                    "sinopsis='" + peliculas[4] + "', duración='" + peliculas[5] + "', clasificación='" + peliculas[6] + "' WHERE idPelicula=" + peliculas[1];
+
+            }
+            else if (peliculas[0] == "eliminar")
+            {
+                sql = "DELETE FROM peliculas WHERE idPelicula='" + peliculas[1] + "'";
+            }
+            return ejecutarSQL(sql);
+        }
+        private string ejecutarSQL(String sql)
+        {
+            try
+            {
+                miComando.Connection = miConexion;
+                miComando.CommandText = sql;
+                return miComando.ExecuteNonQuery().ToString();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }
