@@ -199,7 +199,7 @@
             this.btnUltimo.TabIndex = 3;
             this.btnUltimo.Text = ">|";
             this.btnUltimo.UseVisualStyleBackColor = true;
-            this.btnUltimo.Click += new System.EventHandler(this.btnUltimo_Click);
+            this.btnUltimo.Click += new System.EventHandler(this.btnUltimo_Click_1);
             // 
             // btnSiguiente
             // 
@@ -221,7 +221,7 @@
             this.btnAnterior.TabIndex = 1;
             this.btnAnterior.Text = "<";
             this.btnAnterior.UseVisualStyleBackColor = true;
-            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
+            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click_1);
             // 
             // btnPrimero
             // 

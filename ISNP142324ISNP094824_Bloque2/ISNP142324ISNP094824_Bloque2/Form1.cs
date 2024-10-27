@@ -94,23 +94,21 @@ namespace ISNP142324ISNP094824_Bloque2
 
                 posicion += 1;
                 mostrarDatos();
+                btnAnterior.Enabled = true;
+                btnPrimero.Enabled = true;
             }
             else
             {
                 btnSiguiente.Enabled = false;
                 btnUltimo.Enabled = false;
+                
+
             }
         }
 
         private void btnUltimo_Click(object sender, EventArgs e)
         {
-            posicion = dt.Rows.Count - 1;
-            mostrarDatos();
 
-            btnSiguiente.Enabled = false;
-            btnUltimo.Enabled = false;
-            btnPrimero.Enabled = true;
-            btnAnterior.Enabled = true;
         }
 
         private void btnPrimero_Click(object sender, EventArgs e)
@@ -120,12 +118,33 @@ namespace ISNP142324ISNP094824_Bloque2
 
             btnSiguiente.Enabled = true;
             btnUltimo.Enabled = true;
-            btnPrimero.Enabled = false;
-            btnAnterior.Enabled=false;
-
         }
 
         private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            if (posicion > 0)
+            {
+                posicion -= 1;
+                mostrarDatos();
+                btnSiguiente.Enabled = true;
+                btnUltimo.Enabled = true;
+            }
+            else
+            {
+                btnAnterior.Enabled = false;
+                btnPrimero.Enabled = false;
+            }
+        }
+
+        private void btnUltimo_Click_1(object sender, EventArgs e)
+        {
+            posicion = dt.Rows.Count - 1;
+            mostrarDatos();
+            btnPrimero.Enabled = true;
+            btnAnterior.Enabled = true;
+        }
+
+        private void btnAnterior_Click_1(object sender, EventArgs e)
         {
             if (posicion > 0)
             {
